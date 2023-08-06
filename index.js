@@ -64,15 +64,15 @@ app.listen(PORT, () => {
 });
 
 app.post("/confirm-email", authenticateUser, async (request, response) => {
-  console.log(request.query);
+  console.log(request.body);
 
-  if (!request.query.email || !request.query.token || !request.query.tokenId) {
+  if (!request.body.email || !request.body.token || !request.body.tokenId) {
     response.status(401).send("Invalid parameters");
   } else {
     sendEmail(
-      request.query.email,
-      request.query.token,
-      request.query.tokenId
+      request.body.email,
+      request.body.token,
+      request.body.tokenId
     ).then((resp) => {
       const status = {
         response: resp,
