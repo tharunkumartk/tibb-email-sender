@@ -24,6 +24,9 @@ const sendEmail = async (email, token, tokenId) => {
     html: `<div style="text-align: center;"><div style="background-color: rgb(255, 255, 255); font-size: calc(10px + 1vmin); padding: 10%;"><img src="https://i.ibb.co/P94dP1Z/icon.png" alt="logo" style="height: 15vmin;"><p style="margin-bottom: 10vh; font-size: 0.8em;"> RescaleMed </p><h2> Thanks for signing up.</h2><p>We'll keep you posted on the latest behavioral health tips, stored coaching updates and special offers.</p><a href="${url}" style="background-color: rgb(57, 96, 140); border-radius: 15px; padding: 10px 20px; cursor: pointer; font-size: calc(10px + 1vmin); color: rgb(255, 255, 255); text-decoration: none; margin-top: 10vh;">Confirm Email</a></div><div style="background-color: rgb(242, 242, 242); min-height: 25vh; font-size: calc(10px + 2vmin); padding: 5vh 0px 0px; text-align: center;"><div style="display: flex; align-items: center; justify-content: center;"><a href="http://twitter.com/rescalemed" style="font-size: 0.75em; color: rgb(57, 96, 140); margin: 0px 10px;">Twitter</a><a href="https://rescalemed.com/privacy-policy" style="font-size: 0.75em; color: rgb(57, 96, 140); margin: 0px 10px;">Terms and Conditions</a><a href="https://rescalemed.com/" style="font-size: 0.75em; color: rgb(57, 96, 140); margin: 0px 10px;">Website</a></div><p style="font-size: 0.8em;">© 2023 RescaleMed. All rights reserved.</p></div></div>`,
   };
 
+  console.log(email, token, tokenId);
+  console.log(typeof email, typeof token, typeof tokenId);
+
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       return error;
