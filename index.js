@@ -1,7 +1,24 @@
 const nodemailer = require("nodemailer");
 const express = require("express");
+const realm = require("realm");
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const confirmUser = async (token, tokenId) => {
+  try {
+    const app = realm.App.getApp("data-jrnnm");
+    console.log("confirming user...");
+    await app.emailPasswordAuth.confirmUser({
+      token,
+      tokenId,
+    });
+    console.log("confirmed user!");
+    return true;
+  } catch (err) {
+    console.error("Failed to confirm user: ", err);
+    return false;
+  }
+};
 
 const sendResetEmail = async (email, token, tokenId) => {
   const transporter = nodemailer.createTransport({
@@ -97,6 +114,22 @@ app.post("/confirm-email", authenticateUser, async (request, response) => {
       request.body.token,
       request.body.tokenId
     ).then((resp) => {
+      const status = {
+        response: resp,
+      };
+      console.log(resp);
+      response.send(status);
+    });
+  }
+});
+
+app.post("/confirm-token", authenticateUser, async (request, response) => {
+  console.log(request.body);
+
+  if (!request.body.token || !request.body.tokenId) {
+    response.status(401).send("Invalid parameters");
+  } else {
+    confirmUser(request.body.token, request.body.tokenId).then((resp) => {
       const status = {
         response: resp,
       };
