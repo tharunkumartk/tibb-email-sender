@@ -1,7 +1,10 @@
 const nodemailer = require("nodemailer");
 const express = require("express");
 const realm = require("realm");
+const cors = require("cors");
+
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 3000;
 
 const confirmUser = async (token, tokenId) => {
@@ -58,7 +61,7 @@ const sendEmail = async (email, token, tokenId) => {
     },
   });
 
-  const url = `https://master--singular-unicorn-70bfab.netlify.app/?token=${token}&tokenId=${tokenId}`;
+  const url = `https://rescalemed.com/welcome-to-tibbchat/?token=${token}&tokenId=${tokenId}`;
 
   const mailOptions = {
     from: "support@rescalemed.org",
@@ -124,12 +127,12 @@ app.post("/confirm-email", authenticateUser, async (request, response) => {
 });
 
 app.post("/confirm-token", authenticateUser, async (request, response) => {
-  console.log(request.body);
-
-  if (!request.body.token || !request.body.tokenId) {
+  console.log(request.query);
+  if (!request.query.token || !request.query.tokenId) {
     response.status(401).send("Invalid parameters");
+    console.log("test");
   } else {
-    confirmUser(request.body.token, request.body.tokenId).then((resp) => {
+    confirmUser(request.query.token, request.query.tokenId).then((resp) => {
       const status = {
         response: resp,
       };
