@@ -61,7 +61,7 @@ const sendEmail = async (email, token, tokenId) => {
     },
   });
 
-  const url = `https://rescalemed.com/welcome-to-tibbchat/?token=${token}&tokenId=${tokenId}`;
+  const url = `https://master--singular-unicorn-70bfab.netlify.app/?token=${token}&tokenId=${tokenId}`;
 
   const mailOptions = {
     from: "support@rescalemed.org",
