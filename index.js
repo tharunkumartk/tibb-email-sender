@@ -29,7 +29,7 @@ const sendResetEmail = async (email, token, tokenId) => {
     port: 587,
     auth: {
       user: "support@rescalemed.org",
-      pass: "UnicornBot123",
+      pass: "Go2TibbChat$*123",
     },
   });
 
@@ -57,7 +57,7 @@ const sendEmail = async (email, token, tokenId) => {
     port: 587,
     auth: {
       user: "support@rescalemed.org",
-      pass: "UnicornBot123",
+      pass: "Go2TibbChat$*123",
     },
   });
 
